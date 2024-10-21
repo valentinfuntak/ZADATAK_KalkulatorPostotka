@@ -1,0 +1,12 @@
+h1{
+    text-align: center;
+}
+.kucica{
+    text-align: center;
+    border: 3px solid green;
+    padding: 20px;
+}
+.button{
+    padding: 10px;
+    margin-left: 10px;
+}
