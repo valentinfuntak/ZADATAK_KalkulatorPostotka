@@ -3,46 +3,121 @@
 //Koristiti css, urediti izgled
 //https://percentagecalculator.net/
 
-import "../css/Calculator.css"
-import { createSignal } from 'solid-js';
+import { createSignal } from "solid-js";
+import "../css/calculator.css";
 
-function Calcluator() {
+function KalkulatorPostotka() {
+  const [broj1, setBroj1] = createSignal(0);
+  const [postotak1, setPostotak1] = createSignal(0);
+  const [rezultat1, setRezultat1] = createSignal(0);
 
-  const [firstNumber, setFirstNumber] = createSignal();
-  const [firstPrecentage, setFirstPrecentage] = createSignal();
-  const [firstResult, setFirstResult] = createSignal();
+  const [broj2, setBroj2] = createSignal(0);
+  const [brojUkupno, setBrojUkupno] = createSignal(0);
+  const [rezultat2, setRezultat2] = createSignal(0);
 
+  const [broj3, setBroj3] = createSignal(0);
+  const [broj4, setBroj4] = createSignal(0);
+  const [rezultat3, setRezultat3] = createSignal(0);
 
-  const [secondNumber, setSecondNumber] = createSignal();
-  const [secondPrecentage, setSecondPrecentage] = createSignal();
-  const [secondResult, setSecondResult] = createSignal();
+  //FUNKCIJE
 
-  const [thirdNumber, setThirdNumber] = createSignal();
-  const [thirdPrecentage, setThirdPrecentage] = createSignal();
-  const [thirdResult, setThirdResult] = createSignal();
-
-  function CalculatePrecentage(e) {
+  const izracunajPostotak = (e) => {
     e.preventDefault();
-    setFirstResult((firstNumber() * firstPrecentage()) / 100);
-  }
+    setRezultat1(((broj1() * postotak1()) / 100).toFixed(2)); // Zaokruživanje na 2 decimale
+  };
+
+  const izracunajKojiPostotak = (e) => {
+    e.preventDefault();
+    setRezultat2(((broj2() / brojUkupno()) * 100).toFixed(2));
+  };
+
+  const izracunajPromjenu = (e) => {
+    e.preventDefault();
+    setRezultat3((((broj4() - broj3()) / broj3()) * 100).toFixed(2));
+  };
 
   return (
-    <>
-      <h1>KALKULATOR POSTOTKA</h1>
-      <div class="kucica">
-        <h2>Postotak broja</h2>
-        <form onSubmit={CalculatePrecentage}>
-          <label class="text1">Koliko je</label>
-          <input oninput={(e) => setFirstNumber(parseFloat(e.target.value))} class="input1" type="number" value={firstPrecentage} name='postotak' />
-          <label class="text2">% od</label>
-          <input oninput={(e) => setFirstPrecentage(parseFloat(e.target.value))} class="input2" type="number" value={firstNumber}></input>
-          <button class="button" type="sumbit" >Izračunaj</button>
-          <div>Rezultat: {firstResult()}</div>
+    <div class="container">
+
+      <h2 class="title"> KALKULATOR POSTOTKA </h2>
+      
+      {/* 1. Forma */}
+      <div class="window-small">
+        <form class="form-section" onSubmit={izracunajPostotak}>
+          <label>
+            Koliko je
+            <input
+              type="number"
+              value={broj1()}
+              onInput={(e) => setBroj1(parseFloat(e.target.value))}
+            />
+            % od
+            <input
+              type="number"
+              value={postotak1()}
+              onInput={(e) => setPostotak1(parseFloat(e.target.value))}
+            />
+            ?
+          </label>
+          <div>
+            <button type="submit">Izračunaj</button>
+            <div class="result-box">{rezultat1()}</div>
+          </div>
         </form>
       </div>
 
-    </>
+      {/* 2. Forma */}
+      <div class="window-small">
+        <form class="form-section" onSubmit={izracunajKojiPostotak}>
+          <label>
+            Koliki postotak je
+            <input
+              type="number"
+              value={broj2()}
+              onInput={(e) => setBroj2(parseFloat(e.target.value))}
+            />
+            od
+            <input
+              type="number"
+              value={brojUkupno()}
+              onInput={(e) => setBrojUkupno(parseFloat(e.target.value))}
+            />
+            ?
+          </label>
+          <div>
+            <button type="submit">Izračunaj</button>
+            <div class="result-box">{rezultat2()}%</div>
+          </div>
+        </form>
+      </div>
+
+      {/* 3. Forma */}
+      <div class="window-small">
+        <form class="form-section" onSubmit={izracunajPromjenu}>
+          <label>
+            Koji je postotak povećanja/smanjenja od
+            <input
+              type="number"
+              value={broj3()}
+              onInput={(e) => setBroj3(parseFloat(e.target.value))}
+            />
+            na
+            <input
+              type="number"
+              value={broj4()}
+              onInput={(e) => setBroj4(parseFloat(e.target.value))}
+            />
+            ?
+          </label>
+          <div>
+            <button type="submit">Izračunaj</button>
+            <div class="result-box">{rezultat3()}%</div>
+          </div>
+        </form>
+      </div>
+
+    </div>
   );
 }
 
-export default Calcluator;
+export default KalkulatorPostotka;
