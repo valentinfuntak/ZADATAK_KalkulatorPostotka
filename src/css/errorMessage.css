@@ -1,0 +1,35 @@
+.error-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #ff4d4d;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  font-family: "Poppins", serif;
+  font-size: 16px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 300px;
+}
+
+.error-popup p {
+  margin: 0;
+}
+
+.error-popup button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease; 
+}
+
+.error-popup button:hover {
+  color: #000000; 
+  transform: scale(1.1); 
+}
